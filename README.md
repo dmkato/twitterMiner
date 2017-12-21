@@ -10,5 +10,4 @@ Gather information about individuals based on their twitter accounts
 
 # Tech Stack
 * Python
-* R
 * PostGreSQL

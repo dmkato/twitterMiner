@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+if [ $# == 0 ]; then
+    python3.5 ./src/TOTP.py
+
+elif [ "$1" == "test" ]; then
+    python3.5 -m pylint src/TOTP.py --disable=C0111
+    python3.5 -m pytest --cov=src --cov-report term-missing -s
+
+fi
