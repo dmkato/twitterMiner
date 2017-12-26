@@ -1,10 +1,25 @@
 #!/usr/bin/env bash
 
+PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:.:/sbin
+
 if [ $# == 0 ]; then
-    python3.5 ./src/TOTP.py
+    python3.5 ./twitter_miner.py
+
+elif [ "$1" == "store" ]; then
+    echo "Starting at $(date)"
+    source /Users/danielkato/Code/twitterMiner/.env
+    postgres -D /usr/local/var/postgres &
+    python3.5 /Users/danielkato/Code/twitterMiner/src/store_tweets.py
+    pkill postgres
+
+elif [ "$1" == "lint" ]; then
+    python3.5 -m pylint src --disable=C0111
 
 elif [ "$1" == "test" ]; then
-    python3.5 -m pylint src/TOTP.py --disable=C0111
+    python3.5 -m pylint src --disable=C0111
     python3.5 -m pytest --cov=src --cov-report term-missing -s
+
+elif [ "$1" == "bootdb" ]; then
+    postgres -D /usr/local/var/postgres
 
 fi

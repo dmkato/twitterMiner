@@ -1,0 +1,6 @@
+.env
+.cache/
+error.log
+output.log
+src/__pycache__/
+src/pg_interface.py
