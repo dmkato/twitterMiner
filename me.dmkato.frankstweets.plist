@@ -12,9 +12,9 @@
     <key>StartCalendarInterval</key>
     <dict>
       <key>Minute</key>
-      <integer>16</integer>
-      <key>Hour</key>
       <integer>0</integer>
+      <key>Hour</key>
+      <integer>16</integer>
     </dict>
     <key>ProgramArguments</key>
     <array>

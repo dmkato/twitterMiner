@@ -3,3 +3,4 @@
 error.log
 output.log
 src/__pycache__/
+*.png

@@ -1,16 +1,16 @@
 #!/usr/bin/env bash
-
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:.:/sbin
 
 if [ $# == 0 ]; then
+    postgres -D /usr/local/var/postgres &
     python3.5 ./twitter_miner.py
+    pkill postgres
 
 elif [ "$1" == "store" ]; then
     echo "Starting at $(date)"
     source /Users/danielkato/Code/twitterMiner/.env
     postgres -D /usr/local/var/postgres &
     python3.5 /Users/danielkato/Code/twitterMiner/src/store_tweets.py
-    pkill postgres
 
 elif [ "$1" == "lint" ]; then
     python3.5 -m pylint src --disable=C0111

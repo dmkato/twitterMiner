@@ -1,8 +1,7 @@
-import src.gather_tweets as gather_tweets
-import src.mine_info as mine_info
+import src.get_top_words as get_top_words
 
 def main():
-    gather_tweets.load()
+    get_top_words.main()
 
 if __name__ == '__main__':
     main()
