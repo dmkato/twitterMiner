@@ -1,7 +1,7 @@
 import os
 from os.path import join, dirname
 import twitter as Twitter
-import pg_interface as pg
+from src.pg_interface import PG
 from dotenv import load_dotenv
 
 def authenticate():
@@ -26,7 +26,7 @@ def get_tweets(twitter):
     else:
         return None
 
-def get_new_tweets(twitter):
+def get_new_tweets(twitter, pg):
     new_tweets = get_tweets(twitter)
     if not new_tweets:
         return None
@@ -40,20 +40,22 @@ def get_new_tweets(twitter):
 
     return new_tweets[:idx]
 
-def update_pg(new_tweets):
+def update_pg(new_tweets, pg):
     if not new_tweets:
         print("No new tweets")
         return
     for tweet in new_tweets:
-        print(len(new_tweets), "new tweets")
         pg.INSERT("INTO public.tweets (text, date, tweet_id) \
                    VALUES (%s, %s, %s)", tweet)
+    print(len(new_tweets), "new tweets")
 
 def main():
+    pg = PG()
     twitter = authenticate()
-    new_tweets = get_new_tweets(twitter)
-    update_pg(new_tweets)
-    pg.CLOSE()
+    new_tweets = get_new_tweets(twitter, pg)
+    print(new_tweets)
+    update_pg(new_tweets, pg)
+    pg.close()
 
 if __name__ == "__main__":
     main()
